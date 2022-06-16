@@ -1,7 +1,8 @@
+
 export default class List {
     constructor() {
         this.list = [];
-        this.finish = [];
+        this.finishList = [];
     }
     add(item) {
         this.list.push(item);
@@ -13,11 +14,14 @@ export default class List {
 
     }
     remove(id) {
+        const finishItem = this.list.find(item => item.id == id);
         this.list = this.list.filter(item => item.id != id)
-        this.finish(this.list.find(item => item.id == id));
+        if (!finishItem) return;
+        this.finish(finishItem);
+        console.log(this.finishList);
     }
     finish(item) {
-        this.finish.push(item);
+        this.finishList.push(item);
     }
 
 }
