@@ -10,7 +10,18 @@ export default class List {
             return { ...item, id: index };
         })
     }
-    sort() {
+    sort(key) {
+        const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        switch (key) {
+            case "a-z":
+
+                break;
+            case 'z-a':
+
+                break;
+            default:
+                break;
+        }
 
     }
     remove(id) {
