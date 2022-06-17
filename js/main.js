@@ -18,7 +18,6 @@ u.getEle("addItem").addEventListener('click', () => {
     const newTask = new Task(input);
     l.add(newTask);
     u.render(l.list, 'todo');
-    u.addEvent(l, setData);
     setData();
 })
 
@@ -48,16 +47,19 @@ function addEvent() {
         u.render(l.list, 'todo');
         u.render(l.finishList, 'finish')
         // func();
+        setData();
     }
     );
     document.querySelector("#completed").addEventListener('click', (evt) => {
         const isBtn = evt.target.nodeName == "I";
         if (!isBtn) return;
         const id = evt.target.parentNode.id;
-        console.log('work');
-        l.removeFinish(id);
+        console.log(id);
+        l.pop(id);
+        console.log(l.finishList);
         u.render(l.finishList, 'finish')
         // func();
+        setData()
     }
     );
 }
@@ -72,4 +74,3 @@ function setData() {
     })
     localStorage.setItem('data', string);
 }
-localStorage.clear();

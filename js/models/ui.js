@@ -13,8 +13,9 @@ export default class UI {
             <li>
             ${item.task}
             <div class="buttons">
+            <span><small>${item.time}</small></span>
             <button
-            onclick="" id="${item.id}"
+             id="${item.id}"
             class="remove">
             <i class="fas fa-times"
             ></i>
