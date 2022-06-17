@@ -6,11 +6,10 @@ const data = JSON.parse(localStorage.getItem('data'));
 if (data) { list = data.todo; finish = data.finish }
 const u = new UI();
 const l = new List(list, finish);
-console.log(l);
 
 //render 
-u.renderAll(l.list, l.finishList, l);
 
+u.renderAll(l.list, l.finishList);
 
 // 
 u.getEle("addItem").addEventListener('click', () => {
@@ -18,20 +17,13 @@ u.getEle("addItem").addEventListener('click', () => {
     u.getEle('newTask').value = '';
     const newTask = new Task(input);
     l.add(newTask);
-    console.log(l.list);
     u.render(l.list, 'todo');
-    document.querySelectorAll(".buttons button").forEach((item, index) => {
-        item.addEventListener('click', () => {
-            console.log('work');
-            l.remove(item.id);
-            u.render(l.list, 'todo');
-            u.render(l.finishList, 'finish')
-            setData();
-        })
-    }
-    )
+    u.addEvent(l, setData);
     setData();
 })
+
+
+
 u.getEle("two").addEventListener('click', () => {
     u.render(l.sort('a-z'), 'todo');
 })
@@ -45,6 +37,34 @@ u.getEle('all').addEventListener('click', () => {
 
 
 
+function addEvent() {
+    document.querySelector("#todo").addEventListener('click', (evt) => {
+        const isBtn = evt.target.nodeName == "I";
+        if (!isBtn) return;
+        const id = evt.target.parentNode.id;
+        console.log('work');
+        l.remove(id);
+        console.log(l);
+        u.render(l.list, 'todo');
+        u.render(l.finishList, 'finish')
+        // func();
+    }
+    );
+    document.querySelector("#completed").addEventListener('click', (evt) => {
+        const isBtn = evt.target.nodeName == "I";
+        if (!isBtn) return;
+        const id = evt.target.parentNode.id;
+        console.log('work');
+        l.removeFinish(id);
+        u.render(l.finishList, 'finish')
+        // func();
+    }
+    );
+}
+addEvent();
+
+
+
 function setData() {
     const string = JSON.stringify({
         todo: l.list,
@@ -52,3 +72,4 @@ function setData() {
     })
     localStorage.setItem('data', string);
 }
+localStorage.clear();

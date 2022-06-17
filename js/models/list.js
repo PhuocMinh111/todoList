@@ -56,6 +56,10 @@ export default class List {
         this.finish(finishItem);
         console.log(this.finishList);
     }
+    removeFinish(id) {
+        this.finishList = this.finishList.filter(item => item.id !== id)
+    }
+
     finish(item) {
         this.finishList.push(item);
     }
