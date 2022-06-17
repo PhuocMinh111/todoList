@@ -5,5 +5,6 @@ export default class Task {
         this.check = false;
         this.task = task;
         this.id;
+
     }
 }

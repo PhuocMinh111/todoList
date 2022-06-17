@@ -34,6 +34,23 @@ export default class UI {
                 break;
         }
     }
+    renderAll(todo, finish, l) {
+        this.render(todo, 'todo');
+        this.render(finish, 'finish');
+        this.addEvent(l);
+
+    }
+    addEvent(list) {
+        document.querySelectorAll(".buttons button").forEach((item, index) => {
+            item.addEventListener('click', () => {
+                console.log('work');
+                list.remove(item.id);
+                this.render(list.list, 'todo');
+                this.render(list.finishList, 'finish')
+                setData();
+            })
+        });
+    }
     get(id) {
         return this.getEle(id).value;
     }
